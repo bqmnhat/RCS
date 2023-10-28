@@ -1,0 +1,34 @@
+{% extends "rcapp/base_patient.html" %}
+{% block body_block %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>Booking Detail page!</h1>
+    {% if user.is_authenticated %}
+        <h2>Hello {{ user.username }}</h2>
+        <h3>Doctor: {{selected_doctor.user.first_name}} {{selected_doctor.user.last_name}}</h3>
+        <table class="table table-hover">
+        <thead>
+	      <tr>
+	        <th>Start time</th>
+	        <th>End time</th>
+	        <th>Duration</th>
+	        <th>Booking</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+        {% for item in time_table %}
+	    <tr> 
+	         <td>{{ item.start_time }}</td>
+	         <td>{{ item.end_time }}</td>
+	         <td>{{ item.slot_duration }}</td>
+	         <td><a href="/rcapp/booking_detail/{{item.id}}">Book</a></td>
+	    </tr>
+       	{% endfor %}
+       	<tbody>
+   		</table>
+    {% else %}
+        <h2>Register or Login if you'd like to</h2>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
